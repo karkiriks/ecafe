@@ -1,5 +1,6 @@
 package com.edu.ecafe.Domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -16,7 +17,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private String email;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Address address;
 	private String phone;
 	@Enumerated(EnumType.STRING)

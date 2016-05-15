@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Orderline")
 public class Orderline {
 	
 	@Id @GeneratedValue
@@ -15,8 +17,10 @@ public class Orderline {
 	@OneToOne
 	private Product product;
 	@ManyToOne
-	private Order orders;
-	private int subtotal;
+	private Order order;
+	private double price;
+	private double subtotal;
+	
 	public int getQuantity() {
 		return quantity;
 	}
@@ -29,17 +33,23 @@ public class Orderline {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Order getOrders() {
-		return orders;
+	public Order getOrder() {
+		return order;
 	}
-	public void setOrders(Order orders) {
-		this.orders = orders;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
-	public int getSubtotal() {
-		return subtotal;
+	public double getSubtotal() {
+		return this.quantity*this.price;
 	}
 	public void setSubtotal(int subtotal) {
 		this.subtotal = subtotal;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = product.getPrice();
 	}
 	
 	
