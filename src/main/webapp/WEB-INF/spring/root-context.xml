@@ -17,6 +17,9 @@
 	<mvc:annotation-driven />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
+<!-- 	xmlns:aop="http://www.springframework.org/schema/aop"
+	<aop:aspectj-autoproxy/> -->
+	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -50,6 +53,13 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- Security spring config -->
+	<import resource="security-context.xml"/>
+	
+	<bean id="personService"  class="com.edu.ecafe.Service.PersonService">
+		<property name="personRepository" ref="personRepository" />
 	</bean>
 	
 </beans>

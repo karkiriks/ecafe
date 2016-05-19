@@ -1,6 +1,8 @@
 package com.edu.ecafe.Domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -12,9 +14,19 @@ public class Product {
 	private String productName;
 	private String description;
 	private double price;
+	@Enumerated(EnumType.STRING)
 	private ProductType productType;
 	
 	
+	public Product(){}
+	
+	public Product(String productName, String description, double price, ProductType productType) {
+		super();
+		this.productName = productName;
+		this.description = description;
+		this.price = price;
+		this.productType = productType;
+	}
 	public ProductType getProductType() {
 		return productType;
 	}
@@ -38,6 +50,14 @@ public class Product {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

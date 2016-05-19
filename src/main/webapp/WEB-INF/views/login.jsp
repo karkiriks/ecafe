@@ -20,7 +20,7 @@
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body class="bg-success">
-
+	<h2 class="text-center">Customer Login</h2>
 	<div class="col-md-4 col-md-offset-4">
 				<form:form method="post" modelAttribute="loginForm" action="login">
 					<div class="form-group">

@@ -71,8 +71,12 @@
 					<form:input path="address.zipcode" type="text" class="form-control" placeholder="Zipcode" />
 					</div>
 					<form:select path="role" hidden="true">
-						<form:option value="CUSTOMER" label="" />
+						<form:option value="ROLE_CUSTOMER" label="" />
 						<form:options items="${roles}" />
+					</form:select>
+					<form:select path="enable" hidden="true">
+						<form:option value="1" label="" />
+						<form:options items="${enable}" />
 					</form:select>
 					<button type="submit" class="btn btn-primary pull-right">Register</button>
 				</form:form>

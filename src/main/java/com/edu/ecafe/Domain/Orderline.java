@@ -1,5 +1,8 @@
 package com.edu.ecafe.Domain;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -40,9 +43,10 @@ public class Orderline {
 		this.order = order;
 	}
 	public double getSubtotal() {
-		return this.quantity*this.price;
+		NumberFormat formatter = new DecimalFormat("#0.00");
+		return Double.valueOf(formatter.format(this.quantity*this.price))  ;
 	}
-	public void setSubtotal(int subtotal) {
+	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
 	public double getPrice() {

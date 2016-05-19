@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+
+	<!-- needed for security tag lib -->
+	<bean id="webexpressionHandler"
+		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+
+	<security:http use-expressions="true">
+		 <security:intercept-url pattern="/login*"
+			access="permitAll" /> 
+		<security:intercept-url pattern="/customer*"
+			access="permitAll" />
+		<security:intercept-url pattern="/admin*"
+			access="permitAll" />
+
+		<security:form-login />
+		<security:logout logout-success-url="/home"
+			invalidate-session="true" logout-url="/logout" />
+		<security:csrf />
+
+
+	</security:http>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:password-encoder hash="bcrypt" />
+			<security:user-service>
+				<security:user name="admin"
+					password="$2a$06$H1mB1mTQzLgATPgZ4mR97.P6wvP7RAyjC3qQC2vo9vRSjjVIWwqIm"
+					authorities="ROLE_ADMIN" />
+				<security:user name="admin1"
+					password="$2a$06$r5kl7UKXCIyBFHCdAXW7TetlyEp2/SslHLizUxzgZzR2gTKbt/j4."
+					authorities="ROLE_ADMIN" />
+				<security:user name="user"
+					password="$2a$06$lGY4GoZGSY3HLJfujBD0A.ORFuwtjH0OfhqeliUMi3vupSVvkgz/i"
+					authorities="ROLE_USER" />
+			</security:user-service>
+
+		</security:authentication-provider>
+
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query=" SELECT username, password,enable FROM person WHERE username=?;"
+				authorities-by-username-query=" SELECT username, role FROM person where username=?;" />
+		</security:authentication-provider>
+
+
+	</security:authentication-manager>
+
+</beans>

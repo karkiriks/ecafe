@@ -10,10 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Table(name="OrderTable")
 public class Order {
 
 	@Id @GeneratedValue
@@ -21,11 +24,33 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date orderDate;
 	private int quantity;
-	private int totalAmount;
+	private double totalAmount;
 	
 	@OneToMany(mappedBy="order",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Orderline> orderLines;
+	@OneToOne
+	private Person person;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public List<Orderline> getOrderLines() {
+		return orderLines;
+	}
+	public void setOrderLines(List<Orderline> orderLines) {
+		this.orderLines = orderLines;
+	}
+
+	public Person getPerson() {
+		return person;
+	}
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -43,8 +68,9 @@ public class Order {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getTotalAmount() {
-		int totalAmount=0;
+	public double getTotalAmount() {
+		double totalAmount=0;
+		
 		for (Orderline ol : this.orderLines)
 		{
 			totalAmount += ol.getSubtotal();

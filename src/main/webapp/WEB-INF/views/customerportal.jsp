@@ -22,11 +22,13 @@
 <body class="bg-success">
 <div>
 <h2 class="text-center text-info">Customer Portal</h2>
-</div>
-<%@ include file="sidebar.jsp" %>
 <div>
-<%@ include file="breakfast.jsp" %>
+<jsp:include page="sidebar.jsp" />
 </div>
+<div>
 
+<jsp:include page="${page}"/>
+</div>
+</div>
 </body>
 </html>
